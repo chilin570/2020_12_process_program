@@ -6,19 +6,19 @@ import numpy as np
 filename = input("請輸入欲分析資料位置> ").replace(" ", "")
 df = pd.read_excel(filename)
 
-far_associate_correct_ans = input("請輸入遠距聯想測驗標準答案> ").replace(" ", "")
+far_associate_correct_ans = input("請輸入遠距聯想測驗標準答案（空白為預設）> ").replace(" ", "")
 if far_associate_correct_ans == "":
     far_associate_correct_ans = "遠距聯想測驗標準答案.xlsx"
     
 
-筷子 = input("請輸入竹筷子常模> ").replace(" ", "")
+筷子 = input("請輸入竹筷子常模（空白為預設）> ").replace(" ", "")
 if 筷子 == "":
     筷子 = "新編竹筷子常模.xlsx"
-吸管 = input("請輸入吸管常模> ").replace(" ", "")
+吸管 = input("請輸入吸管常模（空白為預設）> ").replace(" ", "")
 if 吸管 == "":
     吸管 = "不尋常用途－吸管常模.xlsx"
 
-寶特瓶 = input("請輸入寶特瓶常模> ").replace(" ", "")
+寶特瓶 = input("請輸入寶特瓶常模（空白為預設）> ").replace(" ", "")
 if 寶特瓶 == "":
     寶特瓶 = "不尋常用途－寶特瓶常模.xlsx"
 
@@ -27,7 +27,7 @@ norm_df["竹筷子"] = pd.read_excel(筷子)
 norm_df["吸管"] = pd.read_excel(吸管)
 norm_df["寶特瓶"] = pd.read_excel(寶特瓶)
 
-標準輸出 = input("請輸入平台計分輸出格式> ").replace(" ", "")
+標準輸出 = input("請輸入平台計分輸出格式（空白為預設）> ").replace(" ", "")
 if 標準輸出 == "":
     標準輸出 = "./平台計分輸出格式.xlsx"
 
@@ -44,7 +44,7 @@ if time_setting == "":
 else:
     time_setting = int(time_setting)
 
-already_score = input("有沒有先前輸出的評分完畢的資料？\n如果有，將能節省大量運算時間> ").replace(" ","")
+already_score = input("有沒有先前輸出的評分完畢的資料？\n如果有，將能節省大量運算時間（空白為無）> ").replace(" ","")
 if already_score == "":
     #先淨化資料
     df["ID"] = df["UserName"].astype(str) + "-" + df["Single/Double Mode"].astype(str) + "-" + df["Quiz Class"].astype(str) + "-" + df["Quiz #"].astype(str)#"].astype(str)
