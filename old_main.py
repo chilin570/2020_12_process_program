@@ -4,8 +4,6 @@ warnings.filterwarnings("ignore")
 import pandas as pd
 import numpy as np 
 filename = input("請輸入欲分析資料位置> ").replace(" ", "")
-if filename == "":
-    filename = "../Chilin_test/Data20201222_final.xlsx"
 df = pd.read_excel(filename)
 
 far_associate_correct_ans = input("請輸入遠距聯想測驗標準答案（空白為預設）> ").replace(" ", "")
@@ -45,7 +43,7 @@ if time_setting == "":
     time_setting = 60
 else:
     time_setting = int(time_setting)
-
+    
 filter_one = input("請問你需要在輸出時過濾掉單一字元的無效答案嗎？（預設為否）> ")
 if filter_one == "":
     filter_one = False
@@ -55,9 +53,7 @@ else:
     print("將在輸出時過濾掉單一字元的無效答案")
     filter_one = True
 
-
 already_score = input("有沒有先前輸出的評分完畢的資料？\n如果有，將能節省大量運算時間（空白為無）> ").replace(" ","")
-
 if already_score == "":
     #先淨化資料
     df["ID"] = df["UserName"].astype(str) + "-" + df["Single/Double Mode"].astype(str) + "-" + df["Quiz Class"].astype(str) + "-" + df["Quiz #"].astype(str)#"].astype(str)
@@ -183,7 +179,7 @@ if already_score == "":
             all_check.append(out_check)
 
         else:
-            is_one_invalid_ans.append(False)
+            is_one_invalid_ans.append(None)
             all_類別.append(None)
             all_獨創力.append(None)
             all_check.append(None)
@@ -209,7 +205,7 @@ else:
 
 
 if filter_one:
-    df = df[(df["is_one_invalid_ans"] == False) | (df["is_one_invalid_ans"] == float("nan"))]
+    df = df[(df["is_one_invalid_ans"] == False) & (df["is_one_invalid_ans"] == None)]
 
 import pandas as pd
 import numpy as np
