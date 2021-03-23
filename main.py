@@ -3,9 +3,20 @@ import warnings
 warnings.filterwarnings("ignore")
 import pandas as pd
 import numpy as np 
+
+print("您好，歡迎使用")
+print("Debug 模式將會把評分過程列出，方便檢測錯誤是發生在哪一筆資料")
+want_debug_mode = input("請問是否要開啟 Debug 模式？ (如輸入 Y 則開啟）> ")
+if "y" in want_debug_mode.lower():
+    print("使用 Debug 模式")
+    debug_mode = True
+else:
+    print("不使用 Debug 模式")
+    debug_mode = False
+
 filename = input("請輸入欲分析資料位置> ").replace(" ", "")
 if filename == "":
-    filename = "../Chilin_test/Data20201222_final.xlsx"
+    filename = "./output20210204.xlsx"
 df = pd.read_excel(filename)
 
 far_associate_correct_ans = input("請輸入遠距聯想測驗標準答案（空白為預設）> ").replace(" ", "")
@@ -94,6 +105,10 @@ if already_score == "":
     for _, row in df.iterrows():
         if row["Quiz Class"] in [4,5,6]:
             #是遠距聯想測驗
+            
+            if debug_mode: 
+                print(row)
+            
             version = row["Quiz Class"] - 3
             quizNumber = row["Quiz #"] + 1
             target = correct_df[correct_df["版本"] == version][correct_df["題號"] == quizNumber]
@@ -147,7 +162,12 @@ if already_score == "":
     is_one_invalid_ans = []
     for _, row in df.iterrows():
         if row["Quiz Class"] in [1,2,3]:
+            
             #是創造力測驗
+            
+            if debug_mode: 
+                print(row)
+            
             out_類別 = None
             out_獨創力 = None
             out_check = None
@@ -206,6 +226,7 @@ if already_score == "":
     print(f"評分完畢，輸出暫存檔 {current_path}/評分完畢的資料_{now_time}.xlsx")
 else:
     df = pd.read_excel(already_score)
+
 
 
 if filter_one:
